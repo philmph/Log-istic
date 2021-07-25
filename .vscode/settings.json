@@ -1,0 +1,11 @@
+{
+  "editor.insertSpaces": true,
+  "editor.rulers": [165],
+  "editor.tabSize": 4,
+  "files.encoding": "utf8",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+  "powershell.codeFormatting.whitespaceBetweenParameters": true
+}
