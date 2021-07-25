@@ -12,3 +12,4 @@
 *.zip
 
 # Add custom ignores below
+docs/import
