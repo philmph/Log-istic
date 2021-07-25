@@ -31,12 +31,13 @@ function Write-Logentry {
     }
 
     process {
+        $ConsoleOutput = $InputObject -as [string]
         switch ($Type) {
             'Verbose' {
-                if (-not ($NoConsoleOutput)) { Write-Verbose -Message $InputObject }
+                if (-not ($NoConsoleOutput)) { Write-Verbose -Message $ConsoleOutput }
             }
-            'Warning' { Write-Warning -Message $InputObject }
-            'Error' { Write-Error -Message $InputObject }
+            'Warning' { Write-Warning -Message $ConsoleOutput }
+            'Error' { Write-Error -Message $ConsoleOutput }
         }
 
         $Logentry = GetLogentry -InputObject $InputObject -Type $Type
