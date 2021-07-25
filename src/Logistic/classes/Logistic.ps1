@@ -1,8 +1,6 @@
-class Logistic
-{
+class Logistic {
     [string]$Path
     hidden [string]$Fullpath
-
     [LogisticType]$Type
     [LogisticFormat]$Format
 
@@ -25,11 +23,10 @@ class Logistic
             throw "$Path is not valid"
         }
 
-        $this.Path = $Path
+        $this.Path     = $Path
         $this.Fullpath = $Fullname
-
-        $this.Type = $Type
-        $this.Format = $Format
+        $this.Type     = $Type
+        $this.Format   = $Format
 
         if ($Type -eq [LogisticType]::StreamWriter) {
             $this.InitializeStreamWriter()

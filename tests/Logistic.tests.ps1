@@ -1,7 +1,10 @@
-Import-Module "$PSScriptRoot\..\src\Logistic.psd1" -Force
+$Rootpath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Logfile = "$env:TEMP\Logistic-$(Get-Random).tests.log"
 
-Describe {
+Get-Module -Name 'Logistic' | Remove-Module -Force
+Import-Module "$Rootpath\..\src\Logistic\Logistic.psd1" -Force
+
+Describe 'Test' {
     Context 'Initialize Logistic class' {
         It 'Should initialize a logfile with default parameters' {
             $obj = [Logistic]::new($Logfile)
@@ -19,7 +22,7 @@ Describe {
         It 'Shouled close the StreamWriter' {
             $obj.CloseSteamWriter()
         }
-
-        Remove-Item -Path $Logfile
     }
 }
+
+Remove-Item -Path $Logfile
