@@ -1,6 +1,6 @@
 enum LogisticType {
     Outfile
     StreamWriter
-    WindowsEventlog
+    # WindowsEventlog
     # SQL
 }
