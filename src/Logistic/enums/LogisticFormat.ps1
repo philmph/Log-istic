@@ -1,0 +1,4 @@
+enum LogisticFormat {
+    JSON
+    SCCM
+}
