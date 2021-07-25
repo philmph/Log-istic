@@ -2,7 +2,7 @@ function GetLogentry {
     [CmdletBinding()]
 
     param (
-        # Message, Type,
+        # Format, Message, Type,
     )
 
     begin {

@@ -40,7 +40,7 @@ function Write-Logentry {
             'Error' { Write-Error -Message $ConsoleOutput }
         }
 
-        $Logentry = GetLogentry -InputObject $InputObject -Type $Type
+        $Logentry = GetLogentry -Format $LogisticObject.Format -InputObject $InputObject -Type $Type
 
         switch ($LogisticInfo.Type) {
             'Outfile' {
