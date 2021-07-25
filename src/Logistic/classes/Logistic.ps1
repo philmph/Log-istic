@@ -21,7 +21,12 @@ class Logistic
             throw "Cannot initialize StreamWriter for $($this.Path)"
         }
 
-        $this.StreamWriter = [System.IO.StreamWriter]::new($Fullname, [System.Text.Encoding]::UTF8)
+        try {
+            $this.StreamWriter = [System.IO.StreamWriter]::new($Fullname, [System.Text.Encoding]::UTF8)
+        } catch {
+            throw "Cannot initialize StreamWriter for $($this.Path): $_"
+            return $null
+        }
         return $this.StreamWriter
     }
 
