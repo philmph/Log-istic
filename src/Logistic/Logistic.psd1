@@ -57,7 +57,7 @@ Description = 'This modules aim is to provide standardized logging mechanics.'
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-# ScriptsToProcess = @()
+ScriptsToProcess = @('./enums/LogisticFormat.ps1', './enums/LogisticType', './classes/Logistic.ps1')
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
