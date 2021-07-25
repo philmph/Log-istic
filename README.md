@@ -2,9 +2,25 @@
 
 ## About
 
+This project is used for providing various different logging methods since PowerShell does not offer this functinoality built in.
+
 ## Installation
 
 ## Usage
+
+Initialize a new `[Logistic]` class using `[Logistic]::new(TYPE, FORMAT, PATH)`. The following options are available
+
+### Type
+
+- Outfile
+- StreamWriter
+- WindowsEventlog (not yet available)
+- SQL (not yet available)
+
+### Format
+
+- JSON
+- SCCM
 
 ## Contributing
 
