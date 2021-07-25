@@ -1,6 +1,6 @@
 class Logistic {
     [string]$Path
-    hidden [string]$Fullpath
+    [string]$Fullpath
     [LogisticType]$Type
     [LogisticFormat]$Format
 
