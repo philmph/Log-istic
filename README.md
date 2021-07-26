@@ -28,6 +28,15 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+### Open Tasks / Ideas
+
+- [ ] Finish initial version
+- [ ] Add functions for reading and browsing a Log-istic logs via PowerShell
+- [ ] Add functionality for custom formats
+- [ ] Add Pester tests
+- [ ] Add Build process
+- [ ] Add automatic PSGallery publishing (via GitHub Actions / Azure DevOps Pipelines)
+
 ## Authors and Acknowledgments
 
 - Philipp Maier
