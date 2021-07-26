@@ -2,20 +2,24 @@
 
 ## About
 
-This project is used for providing various different logging methods since PowerShell does not offer this functinoality built in.
+This project is used for providing various different logging methods for PowerShell. The mopdule provided is opinionated and reflects my idea of how logging should look like. Changes might occur over time.
 
 ## Installation
 
+TODO: PSGallery publishing
+
 ## Usage
 
-Initialize a new `[Logistic]` class using `[Logistic]::new(TYPE, FORMAT, PATH)`. The following options are available
+Initialize a new `[Logistic]` class using `[Logistic]::new(PATH, TYPE, FORMAT)`. The following options are available
+
+### Path
+
+Relative or fully qualified path to a leaf location (logfile). F.e. `'./logistic.log'`.
 
 ### Type
 
 - Outfile
 - StreamWriter
-- WindowsEventlog (not yet available)
-- SQL (not yet available)
 
 ### Format
 
@@ -32,7 +36,7 @@ Please make sure to update tests as appropriate.
 
 - [ ] Finish initial version
 - [ ] Add functions for reading and browsing a Log-istic logs via PowerShell
-- [ ] Add functionality for custom formats
+- [ ] Add functionality for custom text formats
 - [ ] Add Pester tests
 - [ ] Add Build process
 - [ ] Add automatic PSGallery publishing (via GitHub Actions / Azure DevOps Pipelines)
