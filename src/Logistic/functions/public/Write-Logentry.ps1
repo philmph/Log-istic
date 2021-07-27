@@ -4,14 +4,14 @@ function Write-Logentry {
     param (
         [Parameter(
             Mandatory,
-            Position=0,
+            Position = 0,
             ValueFromPipeline
         )]
         [Logistic]$LogisticObject,
 
         [Parameter(
             Mandatory,
-            Position=1,
+            Position = 1,
             ValueFromPipeline,
             ValueFromPipelineByPropertyName
         )]
@@ -31,10 +31,13 @@ function Write-Logentry {
     }
 
     process {
+        # Outputting data without formatting to keep it human readable
         $ConsoleOutput = $InputObject -as [string]
         switch ($Type) {
             'Verbose' {
-                if (-not ($NoConsoleOutput)) { Write-Verbose -Message $ConsoleOutput }
+                if (-not ($NoConsoleOutput)) {
+                    Write-Verbose -Message $ConsoleOutput
+                }
             }
             'Warning' { Write-Warning -Message $ConsoleOutput }
             'Error' { Write-Error -Message $ConsoleOutput }
@@ -42,15 +45,15 @@ function Write-Logentry {
 
         $Logentry = GetLogentry -Format $LogisticObject.Format -InputObject $InputObject -Type $Type
 
-        if ($PSCmdlet.ShouldProcess($LogisticObject.Fullpath, "Write-Logentry")) {
+        if ($PSCmdlet.ShouldProcess($LogisticObject.Fullpath, 'Write-Logentry')) {
             switch ($LogisticObject.Type) {
-            'Outfile' {
-                Out-File -FilePath $LogisticObject.Fullpath -Encoding utf8 -Append -InputObject $Logentry
-            }
+                'Outfile' {
+                    Out-File -FilePath $LogisticObject.Fullpath -Encoding utf8 -Append -InputObject $Logentry
+                }
 
-            'StreamWriter' {
+                'StreamWriter' {
                     # TODO: Check if StreamWriter initialized else Warning
-                ($LogisticObject.StreamWriter).WriteLine($Logentry)
+                    ($LogisticObject.StreamWriter).WriteLine($Logentry)
                 }
             }
         }

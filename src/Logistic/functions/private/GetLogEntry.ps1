@@ -26,10 +26,10 @@ function GetLogentry {
     switch ($Format) {
         'JSON' {
             $Output = [PSCustomObject] @{
-                Timestamp = $Timestamp.ToString('yyyy-MM-dd\ HH\:mm\:ss\.fff')
+                Timestamp  = $Timestamp.ToString('yyyy-MM-dd\ HH\:mm\:ss\.fff')
                 CallOrigin = $CallOrigin
-                Data = $InputObject
-                Type = $Type
+                Data       = $InputObject
+                Type       = $Type
             } | ConvertTo-Json -Compress
         }
 
