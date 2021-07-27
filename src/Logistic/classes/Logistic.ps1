@@ -14,11 +14,10 @@ class Logistic {
 
     hidden Init([string]$Path, [LogisticType]$Type, [LogisticFormat]$Format) {
         if (-not (Test-Path -Path $Path -PathType Container) -and (Test-Path -Path $Path -IsValid)) {
-            if (Test-Path -Path $Path -PathType Leaf) {
-                $Fullname = (Get-Item -Path $Path).Fullname
-            } else {
-                $Fullname = (New-Item -Path $Path -ItemType File -Force).Fullname
+            if (-not (Test-Path -Path $Path -PathType Leaf)) {
+                $null = New-Item -Path $Path -ItemType File -Force
             }
+                $Fullname = (Get-Item -Path $Path).Fullname
         } else {
             throw "$Path is not valid"
         }
