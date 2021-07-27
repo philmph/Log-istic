@@ -6,10 +6,15 @@ class Logistic {
 
     hidden [System.IO.StreamWriter]$StreamWriter
 
-    # Hidden init methods for constructor use
+    # Hidden init methods
     hidden Init ([string]$Path) {
-        # Set Outfile as default
-        $this.Init($Path, 'Outfile', 'JSON')
+        # Set Outfile as default when not specified
+        $this.Init($Path, 'Outfile')
+    }
+
+    hidden Init ([string]$Path, [LogisticType]$Type) {
+        # Set JSON as default when not specified
+        $this.Init($Path, $Type, 'JSON')
     }
 
     hidden Init([string]$Path, [LogisticType]$Type, [LogisticFormat]$Format) {
@@ -32,16 +37,20 @@ class Logistic {
         }
     }
 
-    # Constructor with overloads
+    # Constructors (calling hidden init methods)
     Logistic ([string]$Path) {
         $this.Init($Path)
     }
 
-    # Constructor with overloads
+    Logistic ([string]$Path, [LogisticType]$Type) {
+        $this.Init($Path, $Type)
+    }
+
     Logistic ([string]$Path, [LogisticType]$Type, [LogisticFormat]$Format) {
         $this.Init($Path, $Type, $Format)
     }
 
+    # Class methods
     hidden [void] InitializeStreamWriter () {
         if ($this.Type -eq [LogisticType]::StreamWriter) {
             try {
