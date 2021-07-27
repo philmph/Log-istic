@@ -17,7 +17,7 @@ class Logistic {
             if (-not (Test-Path -Path $Path -PathType Leaf)) {
                 $null = New-Item -Path $Path -ItemType File -Force
             }
-                $Fullname = (Get-Item -Path $Path).Fullname
+            $Fullname = (Get-Item -Path $Path).Fullname
         } else {
             throw "$Path is not valid"
         }
@@ -42,11 +42,15 @@ class Logistic {
         $this.Init($Path, $Type, $Format)
     }
 
-    [void] InitializeStreamWriter () {
-        try {
-            $this.StreamWriter = [System.IO.StreamWriter]::new($this.Fullpath, [System.Text.Encoding]::UTF8)
-        } catch {
-            throw "Cannot initialize StreamWriter for $($this.Fullpath): $_"
+    hidden [void] InitializeStreamWriter () {
+        if ($this.Type -eq [LogisticType]::StreamWriter) {
+            try {
+                $this.StreamWriter = [System.IO.StreamWriter]::new($this.Fullpath, [System.Text.Encoding]::UTF8)
+            } catch {
+                throw "Cannot initialize StreamWriter for $($this.Fullpath): $_"
+            }
+        } else {
+            throw 'Logistic type is not StreamWriter; nothing to initialize'
         }
     }
 
