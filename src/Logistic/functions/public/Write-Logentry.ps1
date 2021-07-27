@@ -42,13 +42,16 @@ function Write-Logentry {
 
         $Logentry = GetLogentry -Format $LogisticObject.Format -InputObject $InputObject -Type $Type
 
-        switch ($LogisticInfo.Type) {
+        if ($PSCmdlet.ShouldProcess($LogisticObject.Fullpath, "Write-Logentry")) {
+            switch ($LogisticObject.Type) {
             'Outfile' {
                 Out-File -FilePath $LogisticObject.Fullpath -Encoding utf8 -Append -InputObject $Logentry
             }
 
             'StreamWriter' {
+                    # TODO: Check if StreamWriter initialized else Warning
                 ($LogisticObject.StreamWriter).WriteLine($Logentry)
+                }
             }
         }
     }
