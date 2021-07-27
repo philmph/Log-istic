@@ -1,4 +1,4 @@
-function ConvertTo-Logentry {
+function Get-LogisticLog {
     [CmdletBinding()]
 
     param (

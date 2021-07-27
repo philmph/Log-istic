@@ -51,6 +51,8 @@ class Logistic {
     }
 
     # Class methods
+    # InitializeStreamWriter is hidden because it will be done during instance of class initialization
+    # Should not be needed for end user interaction
     hidden [void] InitializeStreamWriter () {
         if ($this.Type -eq [LogisticType]::StreamWriter) {
             try {
