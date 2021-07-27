@@ -15,6 +15,8 @@ function GetLogentry {
 
     $Timestamp = Get-Date
 
+    # TODO: Should be moved to public functions since this will always be the calling function
+    # TODO: -> Param
     if ($MyInvocation.PSCommandPath) {
         $CallOrigin = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
     } else {
