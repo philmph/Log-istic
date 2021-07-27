@@ -10,7 +10,20 @@ TODO: PSGallery publishing
 
 ## Usage
 
-Initialize a new `[Logistic]` class using `[Logistic]::new(PATH, TYPE, FORMAT)`. The following options are available
+Initialize a new `[Logistic]` class providing a set of the following overloads. Available inputs see below.
+
+```powershell
+# Initializing Logistic with n overloads
+
+# Defaults to Outfile type and JSON format
+[Logistic]::new('PATH')
+
+# Defaults to JSON format
+[Logistic]::new('PATH', 'TYPE')
+
+# Full constructor
+[Logistic]::new('PATH', 'TYPE', 'FORMAT')
+```
 
 ### Path
 
