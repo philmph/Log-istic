@@ -7,21 +7,17 @@ function GetLogentry {
         [string]$Format,
 
         [Parameter(Mandatory)]
+        [DateTime]$Timestamp,
+
+        [Parameter(Mandatory)]
+        [InvocationInfo]$StackTrace,
+
+        [Parameter(Mandatory)]
         [psobject]$InputObject,
 
         [Parameter(Mandatory)]
         [string]$Type
     )
-
-    $Timestamp = Get-Date
-
-    # TODO: Should be moved to public functions since this will always be the calling function
-    # TODO: -> Param
-    if ($MyInvocation.PSCommandPath) {
-        $CallOrigin = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
-    } else {
-        $CallOrigin = $MyInvocation.CommandOrigin
-    }
 
     switch ($Format) {
         'JSON' {

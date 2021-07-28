@@ -31,6 +31,16 @@ function Write-Logentry {
     }
 
     process {
+        $Timestamp = Get-Date
+
+        # TODO: Dig deeper
+        # Gathering stacktrace information
+        if ($MyInvocation.PSCommandPath) {
+            $StackTrace = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
+        } else {
+            $StackTrace = $MyInvocation.CommandOrigin
+        }
+
         # Outputting data without formatting to keep it human readable
         $ConsoleOutput = $InputObject -as [string]
         switch ($Type) {
@@ -52,8 +62,11 @@ function Write-Logentry {
                 }
 
                 'StreamWriter' {
-                    # TODO: Check if StreamWriter initialized else Warning
-                    ($LogisticObject.StreamWriter).WriteLine($Logentry)
+                    if ($LogisticObject.StreamWriter) {
+                        ($LogisticObject.StreamWriter).WriteLine($Logentry)
+                    } else {
+                        Write-Error 'StreamWriter in $LogisticObject is not initialized'
+                    }
                 }
             }
         }
