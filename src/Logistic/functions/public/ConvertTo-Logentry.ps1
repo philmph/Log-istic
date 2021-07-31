@@ -39,9 +39,9 @@ function ConvertTo-Logentry {
             Inputobject = $InputObject
             Type = $Type
         }
-        $Logentry = GetLogentry @GetLogEntryArgs
+        $Output = GetLogentry @GetLogEntryArgs
 
-        Write-Output -InputObject $Logentry
+        Write-Output -InputObject $Output
     }
 
     end {}
