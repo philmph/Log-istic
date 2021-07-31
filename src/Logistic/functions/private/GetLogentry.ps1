@@ -20,6 +20,7 @@ function GetLogentry {
     )
 
     # Transform
+    # TODO: Shouldnt be ConvertTo-Logentry.ps1 when called from console
     if ($MyInvocation.PSCommandPath) {
         $CallstackOutput = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
     } else {
@@ -44,7 +45,7 @@ function GetLogentry {
             }
 
             $Output = '<![LOG[{0}]LOG]!><time="{1:HH\:mm\:ss\.ffffff}" date="{1:MM-dd-yyyy}" component="{2}" context="" type="{3}" thread="" file="{2}">' -f
-            $Message, $Timestamp, $File, $TypeShort
+            $InputObject, $Timestamp, $CallstackOutput, $TypeShort
         }
 
         # We should never get here, since data is tested in public functions
