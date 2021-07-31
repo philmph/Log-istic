@@ -10,7 +10,7 @@ function GetLogentry {
         [DateTime]$Timestamp,
 
         [Parameter(Mandatory)]
-        [InvocationInfo]$StackTrace,
+        [System.Management.Automation.InvocationInfo]$Callstack,
 
         [Parameter(Mandatory)]
         [psobject]$InputObject,
@@ -19,11 +19,18 @@ function GetLogentry {
         [string]$Type
     )
 
+    # Transform
+    if ($MyInvocation.PSCommandPath) {
+        $CallstackOutput = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
+    } else {
+        $CallstackOutput = $MyInvocation.CommandOrigin
+    }
+
     switch ($Format) {
         'JSON' {
             $Output = [PSCustomObject] @{
                 Timestamp  = $Timestamp.ToString('yyyy-MM-dd\ HH\:mm\:ss\.fff')
-                CallOrigin = $CallOrigin
+                Callstack = $CallstackOutput
                 Data       = $InputObject
                 Type       = $Type
             } | ConvertTo-Json -Compress

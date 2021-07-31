@@ -31,16 +31,6 @@ function Write-Logentry {
     }
 
     process {
-        $Timestamp = Get-Date
-
-        # TODO: Dig deeper
-        # Gathering stacktrace information
-        if ($MyInvocation.PSCommandPath) {
-            $StackTrace = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
-        } else {
-            $StackTrace = $MyInvocation.CommandOrigin
-        }
-
         # Outputting data without formatting to keep it human readable
         $ConsoleOutput = $InputObject -as [string]
         switch ($Type) {
@@ -53,7 +43,20 @@ function Write-Logentry {
             'Error' { Write-Error -Message $ConsoleOutput }
         }
 
-        $Logentry = GetLogentry -Format $LogisticObject.Format -InputObject $InputObject -Type $Type
+        # Gather timestamp information
+        $Timestamp = Get-Date
+
+        # Gather callstack information
+        $Callstack = $MyInvocation
+
+        $GetLogEntryArgs = @{
+            Format = $LogisticObject.Format
+            Timestamp = $Timestamp
+            Callstack = $Callstack
+            Inputobject = $InputObject
+            Type = $Type
+        }
+        $Logentry = GetLogentry @GetLogEntryArgs
 
         if ($PSCmdlet.ShouldProcess($LogisticObject.Fullpath, 'Write-Logentry')) {
             switch ($LogisticObject.Type) {

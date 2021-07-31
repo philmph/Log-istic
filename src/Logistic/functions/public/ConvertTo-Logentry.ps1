@@ -2,7 +2,23 @@ function ConvertTo-Logentry {
     [CmdletBinding()]
 
     param (
+        [Parameter(
+            Mandatory,
+            Position = 0,
+            ValueFromPipeline,
+            ValueFromPipelineByPropertyName
+            )]
+        [Alias('Message')]
+        [ValidateNotNullOrEmpty()]
+        [psobject]$InputObject,
 
+        [Parameter()]
+        [ValidateSet('JSON', 'SCCM')]
+        [string]$Format = 'JSON',
+
+        [Parameter()]
+        [ValidateSet('Verbose', 'Warning', 'Error')]
+        [string]$Type = 'Verbose'
     )
 
     begin {
@@ -10,15 +26,22 @@ function ConvertTo-Logentry {
     }
 
     process {
+        # Gather timestamp information
         $Timestamp = Get-Date
 
-        # TODO: Dig deeper
-        # Gathering stacktrace information
-        if ($MyInvocation.PSCommandPath) {
-            $StackTrace = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
-        } else {
-            $StackTrace = $MyInvocation.CommandOrigin
+        # Gather callstack information
+        $Callstack = $MyInvocation
+
+        $GetLogEntryArgs = @{
+            Format = $Format
+            Timestamp = $Timestamp
+            Callstack = $Callstack
+            Inputobject = $InputObject
+            Type = $Type
         }
+        $Logentry = GetLogentry @GetLogEntryArgs
+
+        Write-Output -InputObject $Logentry
     }
 
     end {}
