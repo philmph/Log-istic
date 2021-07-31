@@ -25,7 +25,7 @@ function Get-LogisticLog {
     }
 
     process {
-        $Content = Get-Content -Path $Path -Encoding utf8
+        $Content = @(Get-Content -Path $Path -Encoding utf8)
 
         $Type = switch -Regex ($Content[0]) {
             '^\{"' { 'JSON' }
