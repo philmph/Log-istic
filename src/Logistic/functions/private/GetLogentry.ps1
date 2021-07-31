@@ -44,7 +44,7 @@ function GetLogentry {
                 'Error' { '3' }
             }
 
-            $Output = '<![LOG[{0}]LOG]!><time="{1:HH\:mm\:ss\.ffffff}" date="{1:MM-dd-yyyy}" component="{2}" context="" type="{3}" thread="" file="{2}">' -f
+            $Output = '<![LOG[{0}]LOG]!><time="{1:HH\:mm\:ss\.ffffff}" date="{1:yyyy-MM-dd}" component="{2}" context="" type="{3}" thread="" file="{2}">' -f
             $InputObject, $Timestamp, $CallstackOutput, $TypeShort
         }
 
