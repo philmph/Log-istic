@@ -44,11 +44,27 @@ function Get-LogisticLog {
                 }
 
                 'SCCM' {
-                    # <![LOG[Testobjekt]LOG]!><time="18:24:56.722516" date="07-31-2021" component="Write-Logentry.ps1" context="" type="1" thread="" file="Write-Logentry.ps1">
-                    # '<![LOG[{0}]LOG]!><time="{1:HH\:mm\:ss\.ffffff}" date="{1:MM-dd-yyyy}" component="{2}" context="" type="{3}" thread="" file="{2}">'
+                    # '<![LOG[{0}]LOG]!><time="{1:HH\:mm\:ss\.ffffff}" date="{1:yyyy-MM-dd}" component="{2}" context="" type="{3}" thread="" file="{2}">'
                     $Regex = 'LOG\[(?<Data>.+?)\].+time="(?<Time>.+?)" date="(?<Date>.+?)" component="(?<Callstack>.+?)".+type="(?<Type>.+?)"'
+                    $RegexMatches = [regex]::Matches($Line, $Regex)
 
-                    # TODO: Implement logic
+                    $Timestamp = '{0} {1}' -f $RegexMatches[0].Groups['Date'], $RegexMatches[0].Groups['Time']
+
+                    $TypeLong = switch ($RegexMatches[0].Groups['Type']) {
+                        '1' { 'Verbose' }
+                        '2' { 'Warning' }
+                        '3' { 'Error' }
+                    }
+
+                    $Output = [PSCustomObject] @{
+                        Timestamp = $Timestamp
+                        Callstack = $RegexMatches[0].Groups['Callstack']
+                        Data = $RegexMatches[0].Groups['Data']
+                        Type = $TypeLong
+                        TimestampDatetime = $Timestamp -as [Datetime]
+                    }
+
+                    Write-Output $Output
                 }
             }
         }
