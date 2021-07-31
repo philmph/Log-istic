@@ -25,8 +25,7 @@ $PublicFunctions = $Functions | Where-Object { $_.FullName -match "\\functions\\
 foreach ($Function in $Functions) {
     try {
         . $Function.FullName
-    }
-    catch {
+    } catch {
         Write-Error -ErrorRecord $_ -ErrorAction Stop
     }
 }
