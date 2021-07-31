@@ -2,16 +2,12 @@ function Write-Logentry {
     [CmdletBinding(SupportsShouldProcess)]
 
     param (
-        [Parameter(
-            Mandatory,
-            Position = 0,
-            ValueFromPipeline
-        )]
+        [Parameter(Mandatory)]
         [Logistic]$LogisticObject,
 
         [Parameter(
             Mandatory,
-            Position = 1,
+            Position = 0,
             ValueFromPipeline,
             ValueFromPipelineByPropertyName
         )]
