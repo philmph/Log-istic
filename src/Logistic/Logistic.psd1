@@ -30,7 +30,7 @@ CompanyName = 'Unknown'
 Copyright = '(c) Philipp Maier. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'This modules aim is to provide standardized logging mechanics.'
+Description = 'This module aims to provide standardized logging mechanics for PowerShell.'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''

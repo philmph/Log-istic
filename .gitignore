@@ -12,4 +12,5 @@
 *.zip
 
 # Add custom ignores below
-docs/import
+docs/import/
+tests/logfiles/
