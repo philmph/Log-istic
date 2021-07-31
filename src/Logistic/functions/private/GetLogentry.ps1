@@ -19,19 +19,18 @@ function GetLogentry {
         [string]$Type
     )
 
-    # Transform
-    # TODO: Shouldnt be ConvertTo-Logentry.ps1 when called from console
-    if ($MyInvocation.PSCommandPath) {
-        $CallstackOutput = Split-Path -Path $MyInvocation.PSCommandPath -Leaf
+    # Transform MyInvocation info to outputable format
+    if ($Callstack.PSCommandPath) {
+        $CallstackOutput = Split-Path -Path $Callstack.PSCommandPath -Leaf
     } else {
-        $CallstackOutput = $MyInvocation.CommandOrigin
+        $CallstackOutput = $Callstack.CommandOrigin
     }
 
     switch ($Format) {
         'JSON' {
             $Output = [PSCustomObject] @{
                 Timestamp  = $Timestamp.ToString('yyyy-MM-dd\ HH\:mm\:ss\.fff')
-                Callstack = $CallstackOutput
+                Callstack = $CallstackOutput -as [string]
                 Data       = $InputObject
                 Type       = $Type
             } | ConvertTo-Json -Compress
@@ -51,5 +50,6 @@ function GetLogentry {
         # We should never get here, since data is tested in public functions
         default { throw 'Format for logentry creation unknown' }
     }
+
     Write-Output -InputObject $Output
 }
