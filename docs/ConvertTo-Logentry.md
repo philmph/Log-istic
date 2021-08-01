@@ -1,7 +1,7 @@
 ---
 external help file: Logistic-help.xml
 Module Name: Logistic
-online version: TODO: Add docs/markdown to GitHub
+online version: https://github.com/philmph/Log-istic/blob/main/docs/ConvertTo-Logentry.md
 schema: 2.0.0
 ---
 
@@ -14,11 +14,12 @@ Converts an InputObject (f.e.
 
 ## SYNTAX
 
-```
+```powershell
 ConvertTo-Logentry [-InputObject] <PSObject> [-Format <String>] [-Type <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Converts an InputObject (f.e.
 \[string\], \[PSCustomObject\]) into a log string.
 
@@ -26,28 +27,28 @@ Converts an InputObject (f.e.
 
 ### EXAMPLE 1
 
-```
+```powershell
 ConvertTo-Logentry -InputObject "Teststring" -Format JSON
 {"Timestamp":"2021-08-01 23:09:11.179","Callstack":"Runspace","Data":"Teststring","Type":"Verbose"}
 ```
 
 ### EXAMPLE 2
 
-```
+```powershell
 ConvertTo-Logentry -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Format JSON
 {"Timestamp":"2021-08-01 23:09:58.362","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Verbose"}
 ```
 
 ### EXAMPLE 3
 
-```
+```powershell
 ConvertTo-Logentry -InputObject "Teststring" -Format SCCM
 <![LOG[Teststring]LOG]!><time="23:10:55.309843" date="2021-08-01" component="Runspace" context="" type="1" thread="" file="Runspace">
 ```
 
 ### EXAMPLE 4
 
-```
+```powershell
 ConvertTo-Logentry -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Format SCCM
 <![LOG[@{Testobject=Data}]LOG]!><time="23:11:19.298018" date="2021-08-01" component="Runspace" context="" type="1" thread="" file="Runspace">
 ```
