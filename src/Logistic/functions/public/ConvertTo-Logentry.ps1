@@ -42,7 +42,7 @@ function ConvertTo-Logentry {
         Author Git:		https://github.com/philmph
 
     .LINK
-        TODO: Add docs/markdown to GitHub
+        https://github.com/philmph/Log-istic/blob/main/docs/ConvertTo-Logentry.md
     #>
 
     [CmdletBinding()]
