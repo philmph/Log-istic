@@ -8,12 +8,21 @@ on:
       - main
 
 jobs:
-  continous-integration:
-    runs-on: ubuntu-latest
+  tests:
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Run a test script
-        run: |
-          Write-Host 'This is a test run'
-          Get-ChildItem -Path .\
+      - name: Checkout repositry
+        uses: actions/checkout@v2
 
+      - name: Run pester tests
+        shell: pwsh
+        run: |
+          Set-PSRepository -SourceLocation PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -RequiredVersion '5.2.2' -Confirm:$false -Force
+          Invoke-Pester -Path ./tests/*.tests.ps1 -OutputFile ./test-results.xml -OutputFormat NUnitXml
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        if: always()
+        with:
+          files: ./test-results.xml
