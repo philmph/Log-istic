@@ -1,0 +1,19 @@
+---
+
+name: logistic-ci
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  continous-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a test script
+        run: |
+          Write-Host 'This is a test run'
+          Get-ChildItem -Path .\
+
