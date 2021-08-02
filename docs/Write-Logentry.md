@@ -148,7 +148,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 Author: Philipp Maier
-Author Git: https://github.com/philmph
+
+Author Git: [GitHub](https://github.com/philmph)
 
 ## RELATED LINKS
 
