@@ -89,11 +89,11 @@ function Write-Logentry {
         $Callstack = $MyInvocation
 
         $GetLogEntryArgs = @{
-            Format = $LogisticObject.Format
-            Timestamp = $Timestamp
-            Callstack = $Callstack
+            Format      = $LogisticObject.Format
+            Timestamp   = $Timestamp
+            Callstack   = $Callstack
             Inputobject = $InputObject
-            Type = $Type
+            Type        = $Type
         }
         $Logentry = GetLogentry @GetLogEntryArgs
 
