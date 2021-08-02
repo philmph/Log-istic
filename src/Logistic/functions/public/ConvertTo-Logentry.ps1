@@ -38,8 +38,8 @@ function ConvertTo-Logentry {
         [string]
 
     .NOTES
-        Author:			Philipp Maier
-        Author Git:		https://github.com/philmph
+        Author: Philipp Maier
+        Author Git: https://github.com/philmph
 
     .LINK
         https://github.com/philmph/Log-istic/blob/main/docs/ConvertTo-Logentry.md
@@ -53,7 +53,7 @@ function ConvertTo-Logentry {
             Position = 0,
             ValueFromPipeline,
             ValueFromPipelineByPropertyName
-            )]
+        )]
         [Alias('Message')]
         [ValidateNotNullOrEmpty()]
         [psobject]$InputObject,
@@ -79,11 +79,11 @@ function ConvertTo-Logentry {
         $Callstack = $MyInvocation
 
         $GetLogEntryArgs = @{
-            Format = $Format
-            Timestamp = $Timestamp
-            Callstack = $Callstack
+            Format      = $Format
+            Timestamp   = $Timestamp
+            Callstack   = $Callstack
             Inputobject = $InputObject
-            Type = $Type
+            Type        = $Type
         }
         $Output = GetLogentry @GetLogEntryArgs
 
