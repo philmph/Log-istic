@@ -104,6 +104,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 Author: Philipp Maier
+
 Author Git: [GitHub](https://github.com/philmph)
 
 ## RELATED LINKS
