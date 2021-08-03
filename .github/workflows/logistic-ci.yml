@@ -32,8 +32,9 @@ jobs:
           Import-Module -Name Pester -RequiredVersion '${{ env.PesterVersion }}' -Force
           $PesterConfig = [PesterConfiguration]::Default
           $PesterConfig.Run.Path = './tests/*.tests.ps1'
+          $PesterConfig.TestResult.Enabled = $true
           $PesterConfig.TestResult.OutputFormat = 'NUnitXml'
-          $PesterConfig.TestResult.OutputPath = 'testResults.xml'
+          $PesterConfig.TestResult.OutputPath = './testResults.xml'
           Invoke-Pester -Configuration $PesterConfig
 
       - name: Publish test results
