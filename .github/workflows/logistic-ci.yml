@@ -31,7 +31,7 @@ jobs:
           Write-Information -MessageData 'Running Pester tests'
           Import-Module -Name Pester -RequiredVersion '${{ env.PesterVersion }}' -Force
           $PesterConfig = [PesterConfiguration]::Default
-          $PesterConfig.Run.Path = './tests/*.tests.ps1'
+          $PesterConfig.Run.Path = './tests/*.Tests.ps1'
           $PesterConfig.TestResult.Enabled = $true
           $PesterConfig.TestResult.OutputFormat = 'JUnitXml'
           $PesterConfig.TestResult.OutputPath = './testResults.xml'
