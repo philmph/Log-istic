@@ -2,10 +2,7 @@
 
 name: logistic-ci
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   pester-test:
@@ -37,13 +34,13 @@ jobs:
           $PesterConfig.TestResult.OutputPath = './testResults.xml'
           Invoke-Pester -Configuration $PesterConfig
 
-      # - name: Publish test results
-        # uses: EnricoMi/publish-unit-test-result-action/composite@v1
-        # if: always()
-        # with:
-          # files: ./testResults.xml
-
       - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        if: always()
+        with:
+          files: ./testResults.xml
+
+      - name: Upload test artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
