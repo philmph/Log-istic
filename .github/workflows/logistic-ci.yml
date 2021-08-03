@@ -33,7 +33,7 @@ jobs:
           $PesterConfig = [PesterConfiguration]::Default
           $PesterConfig.Run.Path = './tests/*.tests.ps1'
           $PesterConfig.TestResult.Enabled = $true
-          $PesterConfig.TestResult.OutputFormat = 'NUnitXml'
+          $PesterConfig.TestResult.OutputFormat = 'JUnitXml'
           $PesterConfig.TestResult.OutputPath = './testResults.xml'
           Invoke-Pester -Configuration $PesterConfig
 
