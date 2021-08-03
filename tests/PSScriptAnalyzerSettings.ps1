@@ -56,13 +56,6 @@
         'PSUseSupportsShouldProcess',
         'PSUseToExportFieldsInManifest',
         'PSUseUsingScopeModifierInNewRunspaces',
-        'PSUseUTF8EncodingForHelpFile',
-        'PSDSCDscExamplesPresent',
-        'PSDSCDscTestsPresent',
-        'PSDSCReturnCorrectTypesForDSCFunctions',
-        'PSDSCUseIdenticalMandatoryParametersForDSC',
-        'PSDSCUseIdenticalParametersForDSC',
-        'PSDSCStandardDSCFunctionsInResource',
-        'PSDSCUseVerboseMessageInDSCResource'
+        'PSUseUTF8EncodingForHelpFile'
     )
 }
