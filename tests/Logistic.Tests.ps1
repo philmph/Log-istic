@@ -1,11 +1,11 @@
 Describe 'Module Tests' {
-    $ModuleName = "Logistic"
+    $ModuleName = 'Logistic'
     $TestRoot = $PSScriptRoot
     $ModuleRoot = Resolve-Path -Path "$TestRoot\..\src\$ModuleName"
 
     Context 'Module and manifest tests' {
         $PSDefaultParameterValues = @{
-            "It:TestCases" = @{
+            'It:TestCases' = @{
                 ModuleName = $ModuleName
                 ModuleRoot = $ModuleRoot
             }
@@ -19,7 +19,7 @@ Describe 'Module Tests' {
             "$ModuleRoot\$ModuleName.psd1" | Should -Exist
         }
 
-        It -Name "<ModuleName>.psd1 passes Test-ModuleManifest" {
+        It -Name '<ModuleName>.psd1 passes Test-ModuleManifest' {
             $Result = [bool](Test-ModuleManifest -Path "$ModuleRoot\$ModuleName.psd1")
 
             $Result | Should -Be $true
@@ -32,7 +32,7 @@ Describe 'Module Tests' {
 
         # Get PSScriptAnalyzerRules
         $PSScriptAnalyzerSettings = Resolve-Path -Path "$TestRoot\PSScriptAnalyzerSettings.ps1"
-        $Rules = (. $PSScriptAnalyzerSettings)["IncludeRules"]
+        $Rules = (. $PSScriptAnalyzerSettings)['IncludeRules']
 
         # Generate TestCases
         $TestCasesPSScriptAnalyzer = @(
@@ -41,17 +41,17 @@ Describe 'Module Tests' {
 
                 foreach ($Rule in $Rules) {
                     @{
-                        Name = $Function.Name
+                        Name   = $Function.Name
                         Result = $Result
-                        Rule = $Rule
+                        Rule   = $Rule
                     }
                 }
             }
         )
 
-        It -Name "<Name> passes rule <Rule>" -TestCases $TestCasesPSScriptAnalyzer {
+        It -Name '<Name> passes rule <Rule>' -TestCases $TestCasesPSScriptAnalyzer {
             $Result |
-            Where-Object { $_.RuleName -eq $Rule} |
+            Where-Object { $_.RuleName -eq $Rule } |
             Select-Object -ExpandProperty Message |
             Should -BeNullOrEmpty
         }
@@ -73,30 +73,30 @@ Describe 'Module Tests' {
                 @{
                     BaseName = $Function.BaseName
                     FullName = $Function.FullName
-                    Name = $Function.Name
-                    Type = $Type
-                    Pattern = $Pattern
+                    Name     = $Function.Name
+                    Type     = $Type
+                    Pattern  = $Pattern
                 }
             }
         )
 
         $PSDefaultParameterValues = @{
-            "It:TestCases" = $TestCasesFunctionNaming
+            'It:TestCases' = $TestCasesFunctionNaming
         }
 
-        It -Name "<Name> contains one function" {
+        It -Name '<Name> contains one function' {
             $Result = @(Select-String -Path $FullName -Pattern '^\s*Function\s+')
 
             $Result.Count | Should -Be 1
         }
 
-        It -Name "<Name> should fit naming standards for <type> functions" {
+        It -Name '<Name> should fit naming standards for <type> functions' {
             $Result = @(Select-String -Path $FullName -Pattern $Pattern -CaseSensitive)
 
             $Result.Count | Should -Be 1
         }
 
-        It -Name "<Name> should match ps1 file name" {
+        It -Name '<Name> should match ps1 file name' {
             $FunctionMatches = @(Select-String -Path $FullName -Pattern $Pattern -CaseSensitive)
             $Result = $false
 
