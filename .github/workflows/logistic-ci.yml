@@ -37,8 +37,15 @@ jobs:
           $PesterConfig.TestResult.OutputPath = './testResults.xml'
           Invoke-Pester -Configuration $PesterConfig
 
+      # - name: Publish test results
+        # uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        # if: always()
+        # with:
+          # files: ./testResults.xml
+
       - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        uses: actions/upload-artifact@v2
         if: always()
         with:
-          files: ./testResults.xml
+          name: pester-test
+          path: ./testResults.xml
