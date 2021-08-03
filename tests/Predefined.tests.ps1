@@ -1,10 +1,7 @@
-
-
 Describe 'Module Tests' {
     $ModuleName = "Logistic"
     $TestRoot = $PSScriptRoot
     $ModuleRoot = Resolve-Path -Path "$TestRoot\..\src\$ModuleName"
-    $Functions = Get-ChildItem "$ModuleRoot\functions" -Recurse -Filter *.ps1
 
     Context 'Module and manifest tests' {
         # Required in Pester v5 syntax
@@ -29,15 +26,33 @@ Describe 'Module Tests' {
     }
 
     Context 'Function tests' {
-        It -Name "<Name> passes PSScriptAnalyzer" -TestCases @(
+        # Gather functions
+        $Functions = Get-ChildItem "$ModuleRoot\functions" -Recurse -Filter *.ps1
+
+        # Get PSScriptAnalyzerRules
+        $PSScriptAnalyzerSettings = Resolve-Path -Path "$TestRoot\PSScriptAnalyzerSettings.ps1"
+        $Rules = (. $PSScriptAnalyzerSettings)["IncludeRules"]
+
+        # Generate TestCases
+        $TestCases = @(
             foreach ($Function in $Functions) {
-                @{
-                    Name = $Function.Name
-                    FullName = $Function.FullName
+                $Result = @(Invoke-ScriptAnalyzer -Path $Function.FullName -Settings $PSScriptAnalyzerSettings)
+
+                foreach ($Rule in $Rules) {
+                    @{
+                        Rule = $Rule
+                        Name = $Function.Name
+                        Result = $Result
+                    }
                 }
             }
-        ) {
-            @(Invoke-ScriptAnalyzer -Path $FullName) | Should -BeNullOrEmpty
+        )
+
+        It -Name "<Name> passes rule <Rule>" -TestCases $TestCases {
+            $Result |
+            Where-Object { $Rule -eq $_.RuleName } |
+            Select-Object -ExpandProperty Message |
+            Should -BeNullOrEmpty
         }
     }
 }
