@@ -41,15 +41,34 @@ Relative or fully qualified path to a leaf location (logfile). F.e. `'./logistic
 - JSON
 - SCCM
 
+### Hint
+
+```powershell
+# Don't forget to use the very useful variable $PSDefaultParameterValues when used in a script
+$PSDefaultParameterValues = @{
+    'Write-Logentry:LogisticObject' = $Logistic
+}
+```
+
 ## Example
 
 ```powershell
+# Creating a new [Logistic] instance
 C:\> $Logistic = [Logistic]::new('.\logistic.log', 'StreamWriter')
+
+# Writing a warning into the log
 C:\> Write-Logentry -LogisticObject $Logistic -InputObject "Testentry" -Type Warning
+
 WARNING: Testentry
+
+# Writing an object into the log
 C:\> $CustomObject = [PSCustomObject]@{ Testobject = 123; Testobject2 = "String" }
 C:\> Write-Logentry -LogisticObject $Logistic -InputObject $CustomObject
+
+# Closing the StreamWriter
 C:\> $Logistic.CloseStreamWriter()
+
+# Querying data we just wrote into '.\logistic.log'
 C:\> $Data = Get-LogisticLog -Path .\logistic.log
 C:\> $Data
 
@@ -65,6 +84,8 @@ Data              : @{Testobject=123; Testobject2=String}
 Type              : Verbose
 TimestampDatetime : 31.07.2021 21:47:46
 
+# Expanding the Data property of the $Data object
+# Data : @{Testobject=123; Testobject2=String}
 C:\> $Data[1].Data
 
 Testobject Testobject2
