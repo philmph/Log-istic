@@ -15,17 +15,15 @@ jobs:
       - name: Checkout repositry
         uses: actions/checkout@v2
 
-      - name: Install Pester v5.2.2
+      - name: Install Pester ${{ env.PesterVersion }}
         shell: pwsh
         run: |
-          Write-Information -MessageData 'Installing Pester'
           Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
           Install-Module -Name Pester -RequiredVersion '${{ env.PesterVersion }}' -Confirm:$false -Force
 
       - name: Run pester tests
         shell: pwsh
         run: |
-          Write-Information -MessageData 'Running Pester tests'
           Import-Module -Name Pester -RequiredVersion '${{ env.PesterVersion }}' -Force
           $PesterConfig = [PesterConfiguration]::Default
           $PesterConfig.Run.Path = './tests/*.Tests.ps1'

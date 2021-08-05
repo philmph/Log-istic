@@ -1,0 +1,30 @@
+---
+
+name: logistic-ci
+
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  PesterVersion: '5.2.2'
+
+pool:
+  vmImage: windows-latest
+
+steps:
+  - pwsh: |
+      Import-Module -Name Pester -RequiredVersion '${{ PesterVersion }}' -Force
+      $PesterConfig = [PesterConfiguration]::Default
+      $PesterConfig.Run.Path = './tests/*.Tests.ps1'
+      $PesterConfig.TestResult.Enabled = $true
+      $PesterConfig.TestResult.OutputFormat = 'NUnitXml'
+      $PesterConfig.TestResult.OutputPath = './test-results.xml'
+      Invoke-Pester -Configuration $PesterConfig
+    displayName: Run pester tests
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'NUnit'
+    displayName: Publish test results
