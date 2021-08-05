@@ -1,5 +1,7 @@
 # Log-istic
 
+[![Build Status](https://dev.azure.com/philmph/Log-istic/_apis/build/status/philmph.Log-istic?branchName=main)](https://dev.azure.com/philmph/Log-istic/_build/latest?definitionId=10&branchName=main)
+
 ## About
 
 This project is used for providing various different logging methods for PowerShell. The mopdule provided is opinionated and reflects my idea of how logging should look like. Changes might occur over time.
