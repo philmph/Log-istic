@@ -15,6 +15,11 @@ pool:
 
 steps:
   - pwsh: |
+      Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+      Install-Module -Name Pester -RequiredVersion '${{ variables.PesterVersion }}' -Confirm:$false -Force
+    displayName: Install Pester ${{ variables.PesterVersion }}
+
+  - pwsh: |
       Import-Module -Name Pester -RequiredVersion '${{ variables.PesterVersion }}' -Force
       $PesterConfig = [PesterConfiguration]::Default
       $PesterConfig.Run.Path = './tests/*.Tests.ps1'
