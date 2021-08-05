@@ -7,7 +7,7 @@ trigger:
     include:
       - main
 
-parameters:
+variables:
   PesterVersion: '5.2.2'
 
 pool:
@@ -15,7 +15,7 @@ pool:
 
 steps:
   - pwsh: |
-      Import-Module -Name Pester -RequiredVersion '${{ parameters.PesterVersion }}' -Force
+      Import-Module -Name Pester -RequiredVersion '${{ variables.PesterVersion }}' -Force
       $PesterConfig = [PesterConfiguration]::Default
       $PesterConfig.Run.Path = './tests/*.Tests.ps1'
       $PesterConfig.TestResult.Enabled = $true
