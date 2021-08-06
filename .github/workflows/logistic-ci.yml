@@ -2,7 +2,10 @@
 
 name: logistic-ci
 
-on: push
+on:
+  push:
+    paths:
+      - 'src/**'
 
 jobs:
   upload-module:
@@ -16,4 +19,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: module
-          path: ./src/Logistic/
+          path: src/Logistic/
