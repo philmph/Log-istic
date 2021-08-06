@@ -2,45 +2,18 @@
 
 name: logistic-ci
 
-on: [push, pull_request]
+on: push
 
 jobs:
-  pester-test:
-    runs-on: windows-latest
-
-    env:
-      PesterVersion: '5.2.2'
+  upload-module:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repositry
         uses: actions/checkout@v2
 
-      - name: Install Pester ${{ env.PesterVersion }}
-        shell: pwsh
-        run: |
-          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-          Install-Module -Name Pester -RequiredVersion '${{ env.PesterVersion }}' -Confirm:$false -Force
-
-      - name: Run pester tests
-        shell: pwsh
-        run: |
-          Import-Module -Name Pester -RequiredVersion '${{ env.PesterVersion }}' -Force
-          $PesterConfig = [PesterConfiguration]::Default
-          $PesterConfig.Run.Path = './tests/*.Tests.ps1'
-          $PesterConfig.TestResult.Enabled = $true
-          $PesterConfig.TestResult.OutputFormat = 'JUnitXml'
-          $PesterConfig.TestResult.OutputPath = './testResults.xml'
-          Invoke-Pester -Configuration $PesterConfig
-
-      - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
-        if: always()
-        with:
-          files: ./testResults.xml
-
-      - name: Upload test artifact
+      - name: Upload module artifact
         uses: actions/upload-artifact@v2
-        if: always()
         with:
-          name: pester-test
-          path: ./testResults.xml
+          name: module
+          path: ./src/Logistic/
