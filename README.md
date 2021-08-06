@@ -1,6 +1,6 @@
 # Log-istic
 
-[![Build Status](https://dev.azure.com/philmph/Log-istic/_apis/build/status/philmph.Log-istic?branchName=main)](https://dev.azure.com/philmph/Log-istic/_build/latest?definitionId=10&branchName=main)
+[![Build Status](https://dev.azure.com/philmph/Log-istic/_apis/build/status/logistic-ci?branchName=main)](https://dev.azure.com/philmph/Log-istic/_build/latest?definitionId=10&branchName=main)
 
 ## About
 
