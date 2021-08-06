@@ -32,4 +32,5 @@ steps:
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'NUnit'
+    condition: always()
     displayName: Publish test results
