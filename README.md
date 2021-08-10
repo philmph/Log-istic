@@ -4,7 +4,7 @@
 
 ## About
 
-This project is used for providing various different logging methods for PowerShell. The mopdule provided is opinionated and reflects my idea of how logging should look like. Changes might occur over time.
+This project is used to provide various different logging functions for PowerShell. The module provided is opinionated and reflects my idea of how logging should look like.
 
 ## Installation
 
