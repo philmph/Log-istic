@@ -6,6 +6,9 @@ trigger:
   branches:
     include:
       - main
+  paths:
+    exclude:
+      - README.md
 
 variables:
   PesterVersion: '5.2.2'
