@@ -24,15 +24,24 @@ Writes log entries into logfile with specific formatting.
 
 ### EXAMPLE 1
 ```
-Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring' -Type Warning
-WARNING: Teststring
+Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring1'
 ```
 
 ### EXAMPLE 2
 ```
+Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring2' -Type Warning
+WARNING: Teststring
+```
+
+This example outputs a WARNING message to the console on default $WarningPreference
+
+### EXAMPLE 3
+```
 Write-Logentry -LogisticObject $Logistic -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Type Error
 Write-Logentry : @{Testobject=Data}
 ```
+
+This example outputs an ERROR message to the console on default $ErrorPreference
 
 ## PARAMETERS
 

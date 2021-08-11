@@ -27,14 +27,16 @@ Converts an InputObject (f.e.
 ### EXAMPLE 1
 ```
 ConvertTo-Logentry -InputObject "Teststring" -Format JSON
-{"Timestamp":"2021-08-01 23:09:11.179","Callstack":"Runspace","Data":"Teststring","Type":"Verbose"}
+{"LogID":"","Timestamp":"2021-08-11 22:30:33.130","Callstack":"Runspace","Data":"Teststring","Type":"Verbose"}
 ```
 
 ### EXAMPLE 2
 ```
-ConvertTo-Logentry -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Format JSON
-{"Timestamp":"2021-08-01 23:09:58.362","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Verbose"}
+ConvertTo-Logentry -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Format JSON -LogID 1234
+{"LogID":1234,"Timestamp":"2021-08-11 22:30:45.221","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Verbose"}
 ```
+
+Using -LogID to add an unique identifier to the logentry.
 
 ### EXAMPLE 3
 ```
@@ -99,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -LogID
-{{ Fill LogID Description }}
+Optional to define a LogID to easier reference log entires later.
 
 ```yaml
 Type: String
