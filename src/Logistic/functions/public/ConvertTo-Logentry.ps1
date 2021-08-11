@@ -64,7 +64,9 @@ function ConvertTo-Logentry {
 
         [Parameter()]
         [ValidateSet('Verbose', 'Warning', 'Error')]
-        [string]$Type = 'Verbose'
+        [string]$Type = 'Verbose',
+
+        [string]$LogID = ''
     )
 
     begin {
@@ -79,6 +81,7 @@ function ConvertTo-Logentry {
         $Callstack = $MyInvocation
 
         $GetLogEntryArgs = @{
+            LogID       = $LogID
             Format      = $Format
             Timestamp   = $Timestamp
             Callstack   = $Callstack
