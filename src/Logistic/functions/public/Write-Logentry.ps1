@@ -17,21 +17,11 @@ function Write-Logentry {
 
     .EXAMPLE
         Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring' -Type Warning
-
         WARNING: Teststring
-
-        # Content of logistic.log
-        Get-Content .\logistic.log
-        {"Timestamp":"2021-08-02 20:37:59.548","Callstack":"Runspace","Data":"Teststring","Type":"Warning"}
 
     .EXAMPLE
         Write-Logentry -LogisticObject $Logistic -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Type Error
-
         Write-Logentry : @{Testobject=Data}
-
-        # Content of logistic.log
-        Get-Content .\logistic.log
-        {"Timestamp":"2021-08-02 20:39:57.247","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Error"}
 
     .INPUTS
         [string]
