@@ -16,12 +16,19 @@ function Write-Logentry {
         Defines the log type. Can be 'Verbose' (default), 'Warning' or 'Error'.
 
     .EXAMPLE
-        Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring' -Type Warning
+        Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring1'
+
+    .EXAMPLE
+        Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring2' -Type Warning
         WARNING: Teststring
+
+        This example outputs a WARNING message to the console on default $WarningPreference
 
     .EXAMPLE
         Write-Logentry -LogisticObject $Logistic -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Type Error
         Write-Logentry : @{Testobject=Data}
+
+        This example outputs an ERROR message to the console on default $ErrorPreference
 
     .INPUTS
         [string]

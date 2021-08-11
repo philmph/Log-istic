@@ -7,18 +7,36 @@ function Get-LogisticLog {
         Retrieves Logistic logfile data and converts them into PowerShell objects.
 
     .PARAMETER Path
-        Defines the path to the logfile.
+        Defines the path to the logfile. Possible values 'All' (default) or a GUID.
+
+    .PARAMETER LogID
+        Defines the LogID to filter the log. Possible values 'All' (default), 'Verbose', 'Warning' and 'Error'.
+
+    .PARAMETER Type
+        Defines the Type of entry to filter the log.
 
     .PARAMETER JSONDepth
-        Defines the object depth (only relevant for JSON logfiles).
+        Defines the object depth (only relevant for JSON logfiles). Only used in major PowerShell version >= 5.
 
     .EXAMPLE
         Get-LogisticLog -Path .\logistic_json.log
+        LogID             : 6200096f-1311-45ba-a67c-22b8710152f2
         Timestamp         : 2021-08-02 09:49:33.007
         Callstack         : Runspace
         Data              : Teststring
         Type              : Verbose
         TimestampDatetime : 02.08.2021 09:49:33
+
+    .EXAMPLE
+        Get-LogisticLog -Path .\logistic_json.log -LogID '4c7cd194-7059-4f36-822d-3b4722b7cdc8'
+        LogID             : 4c7cd194-7059-4f36-822d-3b4722b7cdc8
+        Timestamp         : 2021-08-11 22:28:13.961
+        Callstack         : Runspace
+        Data              : Teststring
+        Type              : Error
+        TimestampDatetime : 11.08.2021 22:28:13
+
+        Using -LogID to filter for '4c7cd194-7059-4f36-822d-3b4722b7cdc8'. Alternatively you can filter for -Type.
 
     .EXAMPLE
         Get-LogisticLog -Path .\logistic_sccm.log
@@ -27,6 +45,8 @@ function Get-LogisticLog {
         Data              : Teststring
         Type              : Verbose
         TimestampDatetime : 02.08.2021 09:49:45
+
+        Note that SCCM doesn't provide the LogID functionality.
 
     .INPUTS
         [string]
@@ -92,7 +112,7 @@ function Get-LogisticLog {
                     $Output = $Line |
                     ConvertFrom-Json |
                     # LogID filter only works for JSON objects
-                    Where-Object -FilterScript { ($LogID -eq 'All') -or ($LogID -eq $_.LogID) }
+                    Where-Object -FilterScript { ($LogID -eq 'All') -or ($LogID -eq $_.LogID) } |
                     Select-Object -Property *, @{ N = 'TimestampDatetime'; E = { $_.Timestamp -as [Datetime] } }
                 }
 

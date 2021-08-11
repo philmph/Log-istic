@@ -15,13 +15,18 @@ function ConvertTo-Logentry {
     .PARAMETER Type
         Defines the log type. Can be 'Verbose' (default), 'Warning' or 'Error'.
 
-    .EXAMPLE
-        ConvertTo-Logentry -InputObject "Teststring" -Format JSON
-        {"Timestamp":"2021-08-01 23:09:11.179","Callstack":"Runspace","Data":"Teststring","Type":"Verbose"}
+    .PARAMETER LogID
+        Optional to define a LogID to easier reference log entires later.
 
     .EXAMPLE
-        ConvertTo-Logentry -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Format JSON
-        {"Timestamp":"2021-08-01 23:09:58.362","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Verbose"}
+        ConvertTo-Logentry -InputObject "Teststring" -Format JSON
+        {"LogID":"","Timestamp":"2021-08-11 22:30:33.130","Callstack":"Runspace","Data":"Teststring","Type":"Verbose"}
+
+    .EXAMPLE
+        ConvertTo-Logentry -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Format JSON -LogID 1234
+        {"LogID":1234,"Timestamp":"2021-08-11 22:30:45.221","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Verbose"}
+
+        Using -LogID to add an unique identifier to the logentry.
 
     .EXAMPLE
         ConvertTo-Logentry -InputObject "Teststring" -Format SCCM
