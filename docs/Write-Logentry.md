@@ -8,49 +8,35 @@ schema: 2.0.0
 # Write-Logentry
 
 ## SYNOPSIS
-
 Writes log entries into logfile with specific formatting.
 
 ## SYNTAX
 
-```powershell
-Write-Logentry -LogisticObject <Logistic> [-InputObject] <PSObject> [-Type <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+Write-Logentry -LogisticObject <Logistic> [-InputObject] <PSObject> [-Type <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-
 Writes log entries into logfile with specific formatting.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
-
-```powershell
+```
 Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring' -Type Warning
-
 WARNING: Teststring
-
-# Content of logistic.log
-Get-Content .\logistic.log
-{"Timestamp":"2021-08-02 20:37:59.548","Callstack":"Runspace","Data":"Teststring","Type":"Warning"}
 ```
 
 ### EXAMPLE 2
-
-```powershell
+```
 Write-Logentry -LogisticObject $Logistic -InputObject ([PSCustomObject]@{Testobject = 'Data'}) -Type Error
-
 Write-Logentry : @{Testobject=Data}
-
-# Content of logistic.log
-Get-Content .\logistic.log
-{"Timestamp":"2021-08-02 20:39:57.247","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Error"}
 ```
 
 ## PARAMETERS
 
 ### -LogisticObject
-
 Required as this object provides required log settings.
 
 ```yaml
@@ -66,7 +52,6 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-
 Defines the main log information data.
 Can be \[string\] or complex formats like \[PSCustomObject\].
 
@@ -83,7 +68,6 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-
 Defines the log type.
 Can be 'Verbose' (default), 'Warning' or 'Error'.
 
@@ -100,7 +84,6 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -117,7 +100,6 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
-
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -133,17 +115,17 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### [string]
-
 ## OUTPUTS
 
 ### -
+## NOTES
 
 ## RELATED LINKS
 
 [https://github.com/philmph/Log-istic/blob/main/docs/Write-Logentry.md](https://github.com/philmph/Log-istic/blob/main/docs/Write-Logentry.md)
+
