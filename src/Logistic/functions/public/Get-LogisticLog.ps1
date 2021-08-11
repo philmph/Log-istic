@@ -89,8 +89,15 @@ function Get-LogisticLog {
         foreach ($Line in $Content) {
             switch ($Type) {
                 'JSON' {
+                    # Only use $JSONDepth when PSVersion >5
+                    if ($PSVersionTable.PSVersion.Major -gt 5) {
+                        $PSDefaultParameterValues = @{
+                            'ConvertFrom-Json:Depth' = $JSONDepth
+                        }
+                    }
+
                     $Output = $Line |
-                    ConvertFrom-Json -Depth $JSONDepth |
+                    ConvertFrom-Json |
                     Select-Object -Property *, @{ N = 'TimestampDatetime'; E = { $_.Timestamp -as [Datetime] } }
 
                     Write-Output $Output
