@@ -82,6 +82,13 @@ function Get-LogisticLog {
 
     begin {
         Set-StrictMode -Version 3
+
+        # Only use $JSONDepth when PSVersion >5
+        if ($PSVersionTable.PSVersion.Major -gt 5) {
+            $PSDefaultParameterValues = @{
+                'ConvertFrom-Json:Depth' = $JSONDepth
+            }
+        }
     }
 
     process {
@@ -96,13 +103,6 @@ function Get-LogisticLog {
         foreach ($Line in $Content) {
             switch ($Type) {
                 'JSON' {
-                    # Only use $JSONDepth when PSVersion >5
-                    if ($PSVersionTable.PSVersion.Major -gt 5) {
-                        $PSDefaultParameterValues = @{
-                            'ConvertFrom-Json:Depth' = $JSONDepth
-                        }
-                    }
-
                     $Output = $Line |
                     ConvertFrom-Json |
                     # LogID filter only works for JSON objects
