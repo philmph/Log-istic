@@ -35,7 +35,7 @@ Type              : Verbose
 TimestampDatetime : 02.08.2021 09:49:33
 
 # Content of logistic_json.log
-C:\> Get-Content .\logistic_json.log
+Get-Content .\logistic_json.log
 {"Timestamp":"2021-08-02 09:49:33.007","Callstack":"Runspace","Data":"Teststring","Type":"Verbose"}
 ```
 
@@ -51,7 +51,7 @@ Type              : Verbose
 TimestampDatetime : 02.08.2021 09:49:45
 
 # Content of logistic_sccm.log
-C:\> Get-Content .\logistic_sccm.log
+Get-Content .\logistic_sccm.log
 <![LOG[Teststring]LOG]!><time="09:49:45.330436" date="2021-08-02" component="Runspace" context="" type="1" thread="" file="Runspace">
 ```
 
@@ -100,12 +100,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### [psobject]
-
-## NOTES
-
-Author: Philipp Maier
-
-Author Git: [GitHub](https://github.com/philmph)
 
 ## RELATED LINKS
 
