@@ -70,6 +70,13 @@ function Get-LogisticLog {
             })]
         [string]$Path,
 
+        [Parameter()]
+        [string]$LogID = 'All',
+
+        [Parameter()]
+        [ValidateSet('All', 'Verbose', 'Warning', 'Error')]
+        [string]$Type = 'All',
+
         [int16]$JSONDepth = 3
     )
 
@@ -98,9 +105,9 @@ function Get-LogisticLog {
 
                     $Output = $Line |
                     ConvertFrom-Json |
+                    # LogID filter only works for JSON objects
+                    Where-Object -FilterScript { ($LogID -eq 'All') -or ($LogID -eq $_.LogID) }
                     Select-Object -Property *, @{ N = 'TimestampDatetime'; E = { $_.Timestamp -as [Datetime] } }
-
-                    Write-Output $Output
                 }
 
                 'SCCM' {
@@ -123,9 +130,11 @@ function Get-LogisticLog {
                         Type              = $TypeLong
                         TimestampDatetime = $Timestamp -as [Datetime]
                     }
-
-                    Write-Output $Output
                 }
+            }
+
+            if (($Type -eq 'All') -or ($Type -eq $Output.Type)) {
+                Write-Output -InputObject $Output
             }
         }
     }
