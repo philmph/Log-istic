@@ -106,6 +106,9 @@ function Get-LogisticLog {
             default { Write-Error -Message 'Cannot validate log format' -ErrorAction 'Stop' }
         }
 
+        Write-Verbose -Message "Filtering output for LogID $LogID"
+        Write-Verbose -Message "Filtering output for Type $Type"
+
         foreach ($Line in $Content) {
             switch ($ContentType) {
                 'JSON' {
