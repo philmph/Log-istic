@@ -3,6 +3,8 @@ function GetLogentry {
 
     # Data is verified in public funtions
     param (
+        [string]$LogID,
+
         [Parameter(Mandatory)]
         [string]$Format,
 
@@ -29,6 +31,7 @@ function GetLogentry {
     switch ($Format) {
         'JSON' {
             $Output = [PSCustomObject] @{
+                LogID     = $LogID
                 Timestamp = $Timestamp.ToString('yyyy-MM-dd\ HH\:mm\:ss\.fff')
                 Callstack = $CallstackOutput -as [string]
                 Data      = $InputObject
