@@ -4,6 +4,7 @@ class Logistic {
     [LogisticType]$Type
     [LogisticFormat]$Format
 
+    hidden [string]$LogID
     hidden [System.IO.StreamWriter]$StreamWriter
 
     # Hidden init methods
@@ -27,10 +28,13 @@ class Logistic {
             throw "$Path is not valid"
         }
 
+        $GUID = [guid]::NewGuid().Guid
+
         $this.Path     = $Path
         $this.Fullpath = $Fullname
         $this.Type     = $Type
         $this.Format   = $Format
+        $this.LogID    = $GUID
 
         if ($Type -eq [LogisticType]::StreamWriter) {
             $this.InitializeStreamWriter()
