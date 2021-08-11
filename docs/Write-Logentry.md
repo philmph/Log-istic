@@ -14,8 +14,7 @@ Writes log entries into logfile with specific formatting.
 ## SYNTAX
 
 ```powershell
-Write-Logentry -LogisticObject <Logistic> [-InputObject] <PSObject> [-Type <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Write-Logentry -LogisticObject <Logistic> [-InputObject] <PSObject> [-Type <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,7 +31,7 @@ Write-Logentry -LogisticObject $Logistic -InputObject 'Teststring' -Type Warning
 WARNING: Teststring
 
 # Content of logistic.log
-C:\\\> Get-Content .\logistic.log
+Get-Content .\logistic.log
 {"Timestamp":"2021-08-02 20:37:59.548","Callstack":"Runspace","Data":"Teststring","Type":"Warning"}
 ```
 
@@ -44,7 +43,7 @@ Write-Logentry -LogisticObject $Logistic -InputObject ([PSCustomObject]@{Testobj
 Write-Logentry : @{Testobject=Data}
 
 # Content of logistic.log
-C:\\\> Get-Content .\logistic.log
+Get-Content .\logistic.log
 {"Timestamp":"2021-08-02 20:39:57.247","Callstack":"Runspace","Data":{"Testobject":"Data"},"Type":"Error"}
 ```
 
@@ -144,12 +143,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### -
-
-## NOTES
-
-Author: Philipp Maier
-
-Author Git: [GitHub](https://github.com/philmph)
 
 ## RELATED LINKS
 

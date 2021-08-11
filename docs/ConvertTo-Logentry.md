@@ -9,8 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Converts an InputObject (f.e.
-\[string\], \[PSCustomObject\]) into a log string.
+Converts an InputObject (f.e. \[string\], \[PSCustomObject\]) into a log string.
 
 ## SYNTAX
 
@@ -20,8 +19,7 @@ ConvertTo-Logentry [-InputObject] <PSObject> [-Format <String>] [-Type <String>]
 
 ## DESCRIPTION
 
-Converts an InputObject (f.e.
-\[string\], \[PSCustomObject\]) into a log string.
+Converts an InputObject (f.e. \[string\], \[PSCustomObject\]) into a log string.
 
 ## EXAMPLES
 
@@ -117,12 +115,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### [string]
-
-## NOTES
-
-Author: Philipp Maier
-
-Author Git: [GitHub](https://github.com/philmph)
 
 ## RELATED LINKS
 
