@@ -14,29 +14,19 @@ function Get-LogisticLog {
 
     .EXAMPLE
         Get-LogisticLog -Path .\logistic_json.log
-
         Timestamp         : 2021-08-02 09:49:33.007
         Callstack         : Runspace
         Data              : Teststring
         Type              : Verbose
         TimestampDatetime : 02.08.2021 09:49:33
 
-        # Content of logistic_json.log
-        Get-Content .\logistic_json.log
-        {"Timestamp":"2021-08-02 09:49:33.007","Callstack":"Runspace","Data":"Teststring","Type":"Verbose"}
-
     .EXAMPLE
         Get-LogisticLog -Path .\logistic_sccm.log
-
         Timestamp         : 2021-08-02 09:49:45.330436
         Callstack         : Runspace
         Data              : Teststring
         Type              : Verbose
         TimestampDatetime : 02.08.2021 09:49:45
-
-        # Content of logistic_sccm.log
-        Get-Content .\logistic_sccm.log
-        <![LOG[Teststring]LOG]!><time="09:49:45.330436" date="2021-08-02" component="Runspace" context="" type="1" thread="" file="Runspace">
 
     .INPUTS
         [string]
