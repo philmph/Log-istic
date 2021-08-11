@@ -80,14 +80,14 @@ function Get-LogisticLog {
     process {
         $Content = @(Get-Content -Path $Path -Encoding utf8)
 
-        $Type = switch -Regex ($Content[0]) {
+        $ContentType = switch -Regex ($Content[0]) {
             '^\{"' { 'JSON' }
             '^<!' { 'SCCM' }
             default { Write-Error -Message 'Cannot validate log format' -ErrorAction 'Stop' }
         }
 
         foreach ($Line in $Content) {
-            switch ($Type) {
+            switch ($ContentType) {
                 'JSON' {
                     $Output = $Line |
                     ConvertFrom-Json |
