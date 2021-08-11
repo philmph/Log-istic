@@ -74,12 +74,14 @@ C:\> $Logistic.CloseStreamWriter()
 C:\> $Data = Get-LogisticLog -Path .\logistic.log
 C:\> $Data
 
+LogID             : 6e4c7a5f-03bc-4e9e-bc90-a466a4c4e4ff
 Timestamp         : 2021-07-31 21:47:02.737
 Callstack         : Runspace
 Data              : Testentry
 Type              : Warning
 TimestampDatetime : 31.07.2021 21:47:02
 
+LogID             : 6e4c7a5f-03bc-4e9e-bc90-a466a4c4e4ff
 Timestamp         : 2021-07-31 21:47:46.401
 Callstack         : Runspace
 Data              : @{Testobject=123; Testobject2=String}
