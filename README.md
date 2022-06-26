@@ -2,6 +2,10 @@
 
 [![Build Status](https://dev.azure.com/philmph/Log-istic/_apis/build/status/logistic-ci?branchName=main)](https://dev.azure.com/philmph/Log-istic/_build/latest?definitionId=10&branchName=main)
 
+**Note**: This project is not actively maintained by me due to moving away from PowerShell development.
+
+Feel free to use this code if you consider it useful.
+
 ## About
 
 This project is used to provide various different logging functions for PowerShell. The module provided is opinionated and reflects my idea of how logging should look like.
